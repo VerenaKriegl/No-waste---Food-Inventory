@@ -32,7 +32,7 @@ public class DBAccess {
                 + "', '" + product.getExpirationDate()
                 + "', '" + username
                 + "','" + product.getCategory()
-                + "');";
+                + "');";         
 
         Statement statement = database.getStatement();
         statement.execute(sqlString);
