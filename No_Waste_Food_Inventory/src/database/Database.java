@@ -23,7 +23,7 @@ public class Database {
         DB_USER = propertyLoader.getProperty("DB_user");
         DB_PASS = propertyLoader.getProperty("DB_password");
         DB_DRIVER = propertyLoader.getProperty("DB_driver");;
-
+        System.out.println("gag");
         Class.forName(DB_DRIVER);
         connect();
     }
