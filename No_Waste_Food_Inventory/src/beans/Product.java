@@ -11,6 +11,7 @@ public class Product
     private int productNr;
     private boolean reminder;
 
+    //kommentar
     public Product(String productName, LocalDate expirationDate, String category, int productNr, boolean reminder)
     {
         this.productName = productName;
