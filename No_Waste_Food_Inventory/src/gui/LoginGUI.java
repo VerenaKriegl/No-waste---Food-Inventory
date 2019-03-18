@@ -27,7 +27,7 @@ public class LoginGUI extends JFrame {
     
     public LoginGUI() {
         super("Login");
-        
+        System.out.println("test");
         this.pack();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(new Dimension(500,700));
