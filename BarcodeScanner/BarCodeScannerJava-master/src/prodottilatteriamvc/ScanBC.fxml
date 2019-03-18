@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane onKeyPressed="#keyPressed" prefHeight="200.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prodottilatteriamvc.ScanBCController">
+   <center>
+      <Label fx:id="lblScanBC" text="Scansionare il Codice a barre" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+   </center>
+   <bottom>
+      <Button fx:id="btnChiudi" maxHeight="30.0" maxWidth="57.0" minHeight="30.0" minWidth="57.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="30.0" prefWidth="57.0" text="Chiudi" BorderPane.alignment="BOTTOM_RIGHT">
+         <BorderPane.margin>
+            <Insets bottom="20.0" right="20.0" />
+         </BorderPane.margin></Button>
+   </bottom>
+</BorderPane>

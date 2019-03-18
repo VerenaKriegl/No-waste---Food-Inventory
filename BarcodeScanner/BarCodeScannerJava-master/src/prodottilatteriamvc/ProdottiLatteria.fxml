@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<BorderPane maxHeight="250.0" maxWidth="400.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prodottilatteriamvc.ProdottiLatteriaController">
+   <center>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="110.0" minWidth="10.0" prefWidth="110.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="250.0" prefWidth="250.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <padding>
+            <Insets left="20.0" right="20.0" top="20.0" />
+         </padding>
+         <children>
+            <Label fx:id="lblCodiceABarre" text="Codice a barre" />
+            <Label fx:id="lblMarca" text="Marca" GridPane.rowIndex="1" />
+            <Label fx:id="lblNome" text="Nome" GridPane.rowIndex="2" />
+            <Label fx:id="lblPrezzoAcquisto" text="Prezzo acquisto" GridPane.rowIndex="3" />
+            <Label fx:id="lblPrezzoVendita" text="Prezzo vendita" GridPane.rowIndex="4" />
+            <Label fx:id="lblBC" text="BC" GridPane.columnIndex="1" />
+            <TextField fx:id="txtMarca" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtNome" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="txtPrezzoAcquisto" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="txtPrezzoVendita" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+         </children>
+      </GridPane>
+   </center>
+   <bottom>
+      <HBox alignment="BOTTOM_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="70.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="btnScansionaBC" mnemonicParsing="false" onAction="#handleScansionaBC" text="Scansiona BC">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="btnPulisciCampi" mnemonicParsing="false" onAction="#handlePulisciCampi" text="Pulisci Campi">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="btnAggiungiProdotto" mnemonicParsing="false" onAction="#handleAggiungiProdotto" text="Aggingi Prodotto" />
+         </children>
+         <padding>
+            <Insets bottom="20.0" right="20.0" />
+         </padding>
+      </HBox>
+   </bottom>
+</BorderPane>
