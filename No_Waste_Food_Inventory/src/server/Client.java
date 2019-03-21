@@ -60,6 +60,19 @@ public class Client
     private User user;
     public void signUP(User user)
     {
-        this.user = user;
+        try {
+            this.user = user;
+            ois = new ObjectInputStream(socket.getInputStream());
+            oos = new ObjectOutputStream(socket.getOutputStream());
+            oos.writeObject("Registrieren");
+            oos.flush();
+            
+            oos.writeObject(user);
+            oos.flush();
+            
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 }

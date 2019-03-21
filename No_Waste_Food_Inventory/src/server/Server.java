@@ -1,6 +1,7 @@
 package server;
 
 import beans.Product;
+import beans.User;
 import database.DBAccess;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -9,11 +10,14 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Server 
 {
+    private Map<String, ArrayList<Product>> userMap = new HashMap();
     public static void main(String[] args) 
     {
         try {
@@ -95,6 +99,21 @@ public class Server
                 }
                 else
                 {
+                    ArrayList<Product> productList = new ArrayList<>();
+                    User user = (User)ois.readObject();
+                    if(!userMap.keySet().contains(user.getUserName()))
+                    {
+                        dbAccess.insertUser(user);
+                        userMap.put(line, productList);
+                        oos.writeObject("Herzlich Willkommen in unserer Community, "+user.getUserName());
+                        oos.flush();
+                    }
+                    else
+                    {
+                        oos.writeObject("Registrieren fehlgeschlagen");
+                        oos.flush();
+                    }
+                    
                     
                 }
                 
