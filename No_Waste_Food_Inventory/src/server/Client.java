@@ -1,5 +1,6 @@
 package server;
 
+import gui.MenuGUI;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -43,8 +44,12 @@ public class Client
             oos.flush();
             
             String line = (String)ois.readObject();
-            System.out.println(line);         
-            
+            if(line.contains("Willkommen"))
+            {
+                System.out.println(line);         
+                MenuGUI MenuGUI = new MenuGUI();
+                MenuGUI.setVisible(true);
+            }
         } catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
