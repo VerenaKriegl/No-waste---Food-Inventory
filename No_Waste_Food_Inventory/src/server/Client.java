@@ -58,7 +58,7 @@ public class Client
         }
     }
     private User user;
-    public void signUP(User user)
+    public void signUP(User user, LoginGUI loginGUI)
     {
         try {
             this.user = user;
