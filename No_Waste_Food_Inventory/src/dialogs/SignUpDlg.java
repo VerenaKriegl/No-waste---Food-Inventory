@@ -86,6 +86,7 @@ public class SignUpDlg extends JDialog {
     }
 
     public User getUser() {  
+        Date date = (Date) dateOfBirth.getValue();
         User newUser = new User(tfUsername.getText(), tfPass.getText(),
                 (java.sql.Date) dateOfBirth.getValue());
         return newUser;
