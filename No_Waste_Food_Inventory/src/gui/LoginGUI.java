@@ -103,7 +103,7 @@ public class LoginGUI extends JFrame {
             JOptionPane.showMessageDialog(null, "You have to fill all the fields!");
         } else {
             try {
-                client.loginClient(mail, pass);
+                client.loginClient(mail, pass, this);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(LoginGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -115,9 +115,7 @@ public class LoginGUI extends JFrame {
         sdlg.setVisible(true);
         if(sdlg.isOK()) {
             User newUser = sdlg.getUser();
-            client.registrationClient(newUser);
-            this.setVisible(false);
-        }
+            client.signUp(newUser);
     }
     
     public static void main(String[] args) {
