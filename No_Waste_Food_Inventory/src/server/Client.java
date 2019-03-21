@@ -11,6 +11,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class Client 
 {
@@ -79,6 +80,7 @@ public class Client
             }
             else
             {
+                JOptionPane.showMessageDialog(loginGUI, "Registrierung fehlgeschlagen!");
                 System.out.println("Fehler");
             }
             
