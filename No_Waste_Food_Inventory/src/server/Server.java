@@ -85,9 +85,12 @@ public class Server
                     if(password.equals(line))
                     {
                         oos.writeObject("Willkommen, "+username);
+                        oos.flush();                     
+                    }
+                    else
+                    {
+                        oos.writeObject("Falsches Password");
                         oos.flush();
-                        
-                        
                     }
                 }
                 else

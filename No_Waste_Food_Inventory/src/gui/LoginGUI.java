@@ -113,7 +113,6 @@ public class LoginGUI extends JFrame {
         sdlg.setVisible(true);
         if(sdlg.isOK()) {
             User newUser = sdlg.getUser();
-            
         }
     }
     

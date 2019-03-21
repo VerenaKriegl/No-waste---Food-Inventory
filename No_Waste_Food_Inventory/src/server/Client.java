@@ -1,5 +1,6 @@
 package server;
 
+import beans.User;
 import gui.MenuGUI;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -54,8 +55,9 @@ public class Client
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void registrationClient()
+    private User user;
+    public void registrationClient(User user)
     {
-        
+        this.user = user;
     }
 }
