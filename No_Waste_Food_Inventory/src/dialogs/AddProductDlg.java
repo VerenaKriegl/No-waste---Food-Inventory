@@ -5,11 +5,6 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -19,20 +14,17 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
 
-public class AddProductDlg extends JDialog
-{
+public class AddProductDlg extends JDialog {
 
     private JTextField tfProductNr;
     private JTextField tfCategory;
     private JTextField tfProductName;
     private JSpinner spExpirationDate;
-    private DateTimeFormatter dateTimeFormatter;
-    private LocalDate localdate;
+    private Date expDate;
     private Product product;
     private boolean ok;
 
-    public AddProductDlg(java.awt.Frame parent, boolean modal)
-    {
+    public AddProductDlg(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         this.setTitle("Add product");
         this.setSize(new Dimension(500, 600));
@@ -44,8 +36,7 @@ public class AddProductDlg extends JDialog
         ok = false;
     }
 
-    private void initComponents()
-    {
+    private void initComponents() {
         Container con = new Container();
         con.setLayout(new BorderLayout());
 
@@ -54,8 +45,7 @@ public class AddProductDlg extends JDialog
         this.add(con);
     }
 
-    private JPanel getAddingMenu()
-    {
+    private JPanel getAddingMenu() {
         JPanel panelMenu = new JPanel();
         panelMenu.setLayout(new GridLayout(5, 2));
 
@@ -94,35 +84,27 @@ public class AddProductDlg extends JDialog
         return panelMenu;
     }
 
-    private void onAdd()
-    {
+    private void onAdd() {
         ok = true;
         setVisible(false);
     }
 
-    private void onCancel()
-    {
+    private void onCancel() {
         ok = false;
         setVisible(false);
     }
 
-    public Product getProduct()
-    {
-        Date d = (Date) spExpirationDate.getValue();
-        Instant i = d.toInstant();
-        ZonedDateTime zdt = i.atZone(ZoneId.systemDefault());
-        localdate = zdt.toLocalDate();
+    public Product getProduct() {
+        expDate = (Date) spExpirationDate.getValue();
 
-        dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        product = new Product(tfProductName.getText(),
-                localdate,
-                tfCategory.getText(), Integer.parseInt(tfProductNr.getText()), false);
+        product = new Product(tfProductName.getText(), (java.sql.Date) expDate,
+                tfCategory.getText(),
+                Integer.parseInt(tfProductNr.getText()), false);
 
         return product;
     }
 
-    public boolean isOK()
-    {
+    public boolean isOK() {
         return ok;
     }
 }

@@ -5,7 +5,7 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.time.LocalDate;
+import java.sql.Date;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -87,7 +87,7 @@ public class SignUpDlg extends JDialog {
 
     public User getUser() {
         User newUser = new User(tfUsername.getText(), tfPass.getText(),
-                (LocalDate) dateOfBirth.getValue());
+                (Date) dateOfBirth.getValue());
         return newUser;
     }
 

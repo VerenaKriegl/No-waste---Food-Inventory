@@ -1,16 +1,16 @@
 package beans;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 public class Product {
 
     private String productName;
-    private LocalDate expirationDate;
+    private Date expirationDate;
     private String category;
     private int productNr;
     private boolean reminder;
 
-    public Product(String productName, LocalDate expirationDate, String category, int productNr, boolean reminder) {
+    public Product(String productName, Date expirationDate, String category, int productNr, boolean reminder) {
         this.productName = productName;
         this.expirationDate = expirationDate;
         this.category = category;
@@ -22,7 +22,7 @@ public class Product {
         return productName;
     }
 
-    public LocalDate getExpirationDate() {
+    public Date getExpirationDate() {
         return expirationDate;
     }
 
@@ -35,7 +35,7 @@ public class Product {
     }
 
     public int getDaysTillExpiration() {
-        return expirationDate.getDayOfYear() - LocalDate.now().getDayOfYear();
+        return 0;
     }
 
     public boolean isReminder() {
@@ -54,5 +54,4 @@ public class Product {
             return "";
         }
     }
-
 }

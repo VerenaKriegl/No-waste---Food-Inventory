@@ -8,6 +8,7 @@ import beans.User;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -60,7 +61,7 @@ public class DBAccess {
     public static void main(String[] args) {
         try {
             DBAccess db = new DBAccess();
-            db.insertUser(new User("hans", "abcd", LocalDate.now()));
+            db.insertUser(new User("hans", "abcd", new Date()));
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -95,8 +96,7 @@ public class DBAccess {
         while (resultSet.next()) {
             int productNr = resultSet.getInt("productNr");
             String productName = resultSet.getString("description");
-            LocalDate expirationDate = resultSet.getDate("expirationDate")
-                    .toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            Date expirationDate = resultSet.getDate("expirationDate");
             String category = resultSet.getString("category");
 
             Product product = new Product(productName, expirationDate, category, productNr, false);

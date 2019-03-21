@@ -1,14 +1,14 @@
 package beans;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.Date;
 
 public class User implements Serializable {
 
     private String userName, password;
-    private LocalDate dateOfBirth;
+    private Date dateOfBirth;
 
-    public User(String userName, String password, LocalDate dateOfBirth) {
+    public User(String userName, String password, Date dateOfBirth) {
         this.userName = userName;
         this.password = password;
         this.dateOfBirth = dateOfBirth;
@@ -22,7 +22,7 @@ public class User implements Serializable {
         return password;
     }
 
-    public LocalDate getDateOfBirth() {
+    public Date getDateOfBirth() {
         return dateOfBirth;
     }
 }
