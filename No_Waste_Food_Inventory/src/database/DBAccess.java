@@ -5,8 +5,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import beans.Product;
 import beans.User;
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -59,7 +59,7 @@ public class DBAccess {
     public static void main(String[] args) {
         try {
             DBAccess db = new DBAccess();
-            db.insertUser(new User("hans", "abcd", new Date()));
+            db.insertUser(new User("hans", "abcd", new Date(System.currentTimeMillis())));
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
