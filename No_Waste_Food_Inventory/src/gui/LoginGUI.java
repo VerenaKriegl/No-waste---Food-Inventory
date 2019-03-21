@@ -96,7 +96,7 @@ public class LoginGUI extends JFrame {
         return plLogin;
     }
     
-    private void onLogIn() {
+    private void onLogIn() {  
         String mail = tfMail.getText();
         String pass = tfPass.getText();
         if(mail.equals("") || pass.equals("")) {

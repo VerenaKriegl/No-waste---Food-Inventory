@@ -93,7 +93,7 @@ public class AddProductDlg extends JDialog {
         ok = false;
         setVisible(false);
     }
-
+  
     public Product getProduct() {
         expDate = (Date) spExpirationDate.getValue();
 

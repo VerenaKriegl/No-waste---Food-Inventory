@@ -21,7 +21,7 @@ public class DBAccess {
 
     public DBAccess(String url, String user, String passwd, String driver) throws ClassNotFoundException, SQLException {
         database = Database.getInstance(url, user, passwd, driver);
-    }
+    }   
 
    public void insertProduct(Product product, String username) throws Exception {
         String sqlString = "INSERT INTO producttable"

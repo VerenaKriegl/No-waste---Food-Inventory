@@ -12,7 +12,7 @@ public class User implements Serializable {
         this.userName = userName;
         this.password = password;
         this.dateOfBirth = dateOfBirth;
-    }
+    }   
 
     public String getUserName() {
         return userName;
