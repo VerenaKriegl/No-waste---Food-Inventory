@@ -31,7 +31,7 @@ public class Client
     }
     private ObjectOutputStream oos;
     private ObjectInputStream ois;
-    public void loginClient(String userName, String password, LoginGUI gui) throws ClassNotFoundException
+    public void loginClient(String userName, String password, LoginGUI loginGUI) throws ClassNotFoundException
     {
         try {
             ois = new ObjectInputStream(socket.getInputStream());
@@ -49,16 +49,16 @@ public class Client
             if(line.contains("Willkommen"))
             {
                 System.out.println(line);
-                gui.setVisible(false);
-                MenuGUI MenuGUI = new MenuGUI();
-                MenuGUI.setVisible(true);
+                loginGUI.setVisible(false);
+                MenuGUI menuGUI = new MenuGUI();
+                menuGUI.setVisible(true);
             }
         } catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     private User user;
-    public void registrationClient(User user)
+    public void signUP(User user)
     {
         this.user = user;
     }
