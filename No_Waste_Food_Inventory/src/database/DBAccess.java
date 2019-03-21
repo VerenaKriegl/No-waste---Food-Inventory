@@ -82,6 +82,20 @@ public class DBAccess {
         return password;
     }
 
+    public ArrayList<String> showUser() throws Exception {
+        Statement statement = database.getStatement();
+        String sqlQueryProduct = "SELECT * FROM usertable";
+
+        ResultSet resultSet = statement.executeQuery(sqlQueryProduct);
+        ArrayList<String> user = new ArrayList<>();
+        while (resultSet.next()) {
+            String username = resultSet.getString("username");
+            user.add(username);
+        }
+        statement.close();
+        return user;
+    }
+    
     public ArrayList<Product> showAllProducts(String userName) throws Exception {
         Statement statement = database.getStatement();
         String sqlQueryProduct = "SELECT * FROM producttable WHERE username = "+userName+" ;";

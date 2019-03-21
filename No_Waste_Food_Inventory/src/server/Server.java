@@ -80,7 +80,7 @@ public class Server
             try {
                 dbAccess = new DBAccess();
                 String line = (String)ois.readObject();
-                
+                ArrayList<String> userNames = dbAccess.showUser();
                 if(line.contains("Anmelden"))
                 {
                     String username = (String)ois.readObject();
@@ -101,7 +101,7 @@ public class Server
                 {
                     ArrayList<Product> productList = new ArrayList<>();
                     User user = (User)ois.readObject();
-                    if(!userMap.keySet().contains(user.getUserName()))
+                    if(!userNames.contains(user.getUserName()))
                     {
                         dbAccess.insertUser(user);
                         userMap.put(line, productList);

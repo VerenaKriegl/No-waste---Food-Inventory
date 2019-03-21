@@ -7,6 +7,7 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -86,7 +87,13 @@ public class LoginGUI extends JFrame {
         JButton btLogIn = new JButton("Log in");
         btLogIn.addActionListener(e -> onLogIn());
         JButton btSignUp = new JButton("SignUp");
-        btSignUp.addActionListener(e -> onSignUp());
+        btSignUp.addActionListener(e -> {
+            try {
+                onSignUp();
+            } catch (ParseException ex) {
+                Logger.getLogger(LoginGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
      
         plLogin.add(plMail);
         plLogin.add(plPass);
@@ -110,7 +117,7 @@ public class LoginGUI extends JFrame {
         }
     }
     
-    private void onSignUp() {
+    private void onSignUp() throws ParseException {
         SignUpDlg sdlg = new SignUpDlg(this, true);
         sdlg.setVisible(true);
         if(sdlg.isOK()) {

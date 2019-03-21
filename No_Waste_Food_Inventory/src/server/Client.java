@@ -16,17 +16,7 @@ import javax.swing.JOptionPane;
 public class Client 
 {
     private Socket socket;
-    public Client()
-    {
-        try {
-            InetAddress ia = InetAddress.getLocalHost();
-            socket = new Socket(ia, 9999);
-        } catch (UnknownHostException ex) {
-            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+    
     public static void main(String[] args) {
         new Client();
     }
@@ -35,6 +25,8 @@ public class Client
     public void loginClient(String userName, String password, LoginGUI loginGUI) throws ClassNotFoundException
     {
         try {
+            InetAddress ia = InetAddress.getLocalHost();
+            socket = new Socket(ia, 9999);
             ois = new ObjectInputStream(socket.getInputStream());
             oos = new ObjectOutputStream(socket.getOutputStream());
             oos.writeObject("Anmelden");
@@ -62,6 +54,8 @@ public class Client
     public void signUP(User user, LoginGUI loginGUI)
     {
         try {
+            InetAddress ia = InetAddress.getLocalHost();
+            socket = new Socket(ia, 9999);
             this.user = user;
             ois = new ObjectInputStream(socket.getInputStream());
             oos = new ObjectOutputStream(socket.getOutputStream());

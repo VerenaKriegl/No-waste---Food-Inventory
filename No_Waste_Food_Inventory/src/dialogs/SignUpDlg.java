@@ -6,6 +6,8 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -85,9 +87,11 @@ public class SignUpDlg extends JDialog {
         setVisible(false);
     }
 
-    public User getUser() {  
-        Date date = (java.sql.Date) dateOfBirth.getValue();
-        User newUser = new User(tfUsername.getText(), tfPass.getText(), date);
+    public User getUser() throws ParseException {
+        java.util.Date date = (java.util.Date)dateOfBirth.getValue();
+        System.out.println(date);
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        User newUser = new User(tfUsername.getText(), tfPass.getText(), sqlDate);
         return newUser;
     }
 
