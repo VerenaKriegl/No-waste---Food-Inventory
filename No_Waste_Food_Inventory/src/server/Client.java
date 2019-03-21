@@ -58,7 +58,7 @@ public class Client
         }
     }
     private User user;
-    public void registrationClient(User user)
+    public void signUP(User user)
     {
         this.user = user;
     }
