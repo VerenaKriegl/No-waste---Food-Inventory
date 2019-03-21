@@ -5,8 +5,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import beans.Product;
 import beans.User;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
@@ -69,8 +67,7 @@ public class DBAccess {
         }
         
     }
-   
-    
+
     public String getPassword(String userName) throws Exception{
         Statement statement = database.getStatement();
         String sqlQueryPassword = "SELECT * FROM usertable WHERE username = '"+userName+"';";
@@ -85,8 +82,6 @@ public class DBAccess {
         return password;
     }
 
-    
-    
     public ArrayList<Product> showAllProducts(String userName) throws Exception {
         Statement statement = database.getStatement();
         String sqlQueryProduct = "SELECT * FROM producttable WHERE username = "+userName+" ;";
