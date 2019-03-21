@@ -70,7 +70,22 @@ public class Client
             oos.writeObject(user);
             oos.flush();
             
+            String line = (String) ois.readObject();
+            if(line.contains("Willkommen"))
+            {
+                loginGUI.setVisible(false);
+                MenuGUI menuGUI = new MenuGUI();
+                menuGUI.setVisible(true);
+            }
+            else
+            {
+                System.out.println("Fehler");
+            }
+            
+            
         } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
         

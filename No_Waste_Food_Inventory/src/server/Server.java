@@ -112,9 +112,7 @@ public class Server
                     {
                         oos.writeObject("Registrieren fehlgeschlagen");
                         oos.flush();
-                    }
-                    
-                    
+                    }                       
                 }
                 
                 
