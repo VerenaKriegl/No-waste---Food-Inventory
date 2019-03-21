@@ -3,7 +3,8 @@ package beans;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class User implements Serializable{
+public class User implements Serializable {
+
     private String userName, password;
     private LocalDate dateOfBirth;
 
