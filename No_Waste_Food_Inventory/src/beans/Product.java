@@ -5,7 +5,7 @@ import java.util.Date;
 public class Product {
 
     private String productName;
-    private Date expirationDate;
+    private Date expirationDate;                           
     private String category;
     private int productNr;
     private boolean reminder;
