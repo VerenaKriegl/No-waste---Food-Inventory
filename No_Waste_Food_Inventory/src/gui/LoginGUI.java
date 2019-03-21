@@ -24,6 +24,7 @@ public class LoginGUI extends JFrame {
     
     private JTextField tfMail;
     private JTextField tfPass;
+    private Client client;
     
     public LoginGUI() {
         super("Login");
@@ -33,6 +34,8 @@ public class LoginGUI extends JFrame {
         this.setLocationRelativeTo(null);
         
         initComponents();
+        
+        client = new Client();
     }
     
     private void initComponents() {
@@ -99,7 +102,6 @@ public class LoginGUI extends JFrame {
         if(mail.equals("") || pass.equals("")) {
             JOptionPane.showMessageDialog(null, "You have to fill all the fields!");
         } else {
-            Client client = new Client();
             try {
                 client.loginClient(mail, pass);
             } catch (ClassNotFoundException ex) {
@@ -113,6 +115,8 @@ public class LoginGUI extends JFrame {
         sdlg.setVisible(true);
         if(sdlg.isOK()) {
             User newUser = sdlg.getUser();
+            client.registrationClient(newUser);
+            this.setVisible(false);
         }
     }
     

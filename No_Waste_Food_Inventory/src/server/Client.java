@@ -1,6 +1,7 @@
 package server;
 
 import beans.User;
+import gui.LoginGUI;
 import gui.MenuGUI;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -30,7 +31,7 @@ public class Client
     }
     private ObjectOutputStream oos;
     private ObjectInputStream ois;
-    public void loginClient(String userName, String password) throws ClassNotFoundException
+    public void loginClient(String userName, String password, LoginGUI gui) throws ClassNotFoundException
     {
         try {
             ois = new ObjectInputStream(socket.getInputStream());
@@ -47,7 +48,8 @@ public class Client
             String line = (String)ois.readObject();
             if(line.contains("Willkommen"))
             {
-                System.out.println(line);         
+                System.out.println(line);
+                gui.setVisible(false);
                 MenuGUI MenuGUI = new MenuGUI();
                 MenuGUI.setVisible(true);
             }
