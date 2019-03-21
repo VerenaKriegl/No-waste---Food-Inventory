@@ -2,8 +2,7 @@ package beans;
 
 import java.time.LocalDate;
 
-public class Product
-{
+public class Product {
 
     private String productName;
     private LocalDate expirationDate;
@@ -11,9 +10,7 @@ public class Product
     private int productNr;
     private boolean reminder;
 
-    //kommentar m
-    public Product(String productName, LocalDate expirationDate, String category, int productNr, boolean reminder)
-    {
+    public Product(String productName, LocalDate expirationDate, String category, int productNr, boolean reminder) {
         this.productName = productName;
         this.expirationDate = expirationDate;
         this.category = category;
@@ -21,49 +18,39 @@ public class Product
         this.reminder = reminder;
     }
 
-    public String getProductName()
-    {
+    public String getProductName() {
         return productName;
     }
 
-    public LocalDate getExpirationDate()
-    {
+    public LocalDate getExpirationDate() {
         return expirationDate;
     }
 
-    public String getCategory()
-    {
+    public String getCategory() {
         return category;
     }
 
-    public int getProductNr()
-    {
+    public int getProductNr() {
         return productNr;
     }
 
-    public int getDaysTillExpiration()
-    {
+    public int getDaysTillExpiration() {
         return expirationDate.getDayOfYear() - LocalDate.now().getDayOfYear();
     }
 
-    public boolean isReminder()
-    {
+    public boolean isReminder() {
         return reminder;
     }
 
-    public void setReminder(boolean reminder)
-    {
+    public void setReminder(boolean reminder) {
         this.reminder = reminder;
     }
 
     @Override
-    public String toString()
-    {
-        if (reminder)
-        {
+    public String toString() {
+        if (reminder) {
             return "      R!";
-        } else
-        {
+        } else {
             return "";
         }
     }
