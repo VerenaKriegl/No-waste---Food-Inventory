@@ -115,7 +115,7 @@ public class LoginGUI extends JFrame {
         sdlg.setVisible(true);
         if(sdlg.isOK()) {
             User newUser = sdlg.getUser();
-            client.signUP(newUser);
+            client.signUP(newUser, this);
         }
     }
     
