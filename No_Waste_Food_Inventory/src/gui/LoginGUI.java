@@ -116,6 +116,7 @@ public class LoginGUI extends JFrame {
         if(sdlg.isOK()) {
             User newUser = sdlg.getUser();
             client.signUp(newUser);
+        }
     }
     
     public static void main(String[] args) {
