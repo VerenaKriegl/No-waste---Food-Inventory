@@ -68,7 +68,7 @@ public class DBAccess {
             Statement statement = database.getStatement();
             statement.execute(sqlString);
             statement.close();
-    }
+    }   
     
     public static void main(String[] args) {
         DBAccess db;
