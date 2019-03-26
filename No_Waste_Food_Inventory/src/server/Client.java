@@ -8,25 +8,21 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class Client 
 {
-    private Socket socket;
     
-    public static void main(String[] args) {
-        new Client();
-    }
+   
     private ObjectOutputStream oos;
     private ObjectInputStream ois;
     public void loginClient(String userName, String password, LoginGUI loginGUI) throws ClassNotFoundException
     {
         try {
             InetAddress ia = InetAddress.getLocalHost();
-            socket = new Socket(ia, 9999);
+            Socket socket = new Socket(ia, 9999);
             ois = new ObjectInputStream(socket.getInputStream());
             oos = new ObjectOutputStream(socket.getOutputStream());
             oos.writeObject("Anmelden");
@@ -46,6 +42,10 @@ public class Client
                 MenuGUI menuGUI = new MenuGUI();
                 menuGUI.setVisible(true);
             }
+            else
+            {
+                JOptionPane.showMessageDialog(loginGUI, "Login fehlgeschlagen");
+            }
         } catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -55,7 +55,7 @@ public class Client
     {
         try {
             InetAddress ia = InetAddress.getLocalHost();
-            socket = new Socket(ia, 9999);
+            Socket socket = new Socket(ia, 9999);
             this.user = user;
             ois = new ObjectInputStream(socket.getInputStream());
             oos = new ObjectOutputStream(socket.getOutputStream());

@@ -155,10 +155,7 @@ public final class MenuGUI extends JFrame
         }
     }
 
-    public static void main(String[] args)
-    {
-        new MenuGUI().setVisible(true);
-    }
+    
 
     class PopupListener extends MouseAdapter
     {

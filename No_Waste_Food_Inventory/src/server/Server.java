@@ -19,13 +19,7 @@ public class Server {
 
     private Map<String, ArrayList<Product>> userMap = new HashMap();
 
-    public static void main(String[] args) {
-        try {
-            new Server();
-        } catch (IOException ex) {
-            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+    
 
     public Server() throws IOException {
         ServerSocket serverSocket = new ServerSocket(9999);
