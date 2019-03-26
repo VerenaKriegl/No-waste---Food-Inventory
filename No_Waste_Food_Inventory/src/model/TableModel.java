@@ -2,6 +2,7 @@ package model;
 
 import beans.Product;
 import filter.Filter;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
@@ -42,6 +43,8 @@ public class TableModel extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         Product product = products.get(rowIndex);
         Date expDate = new Date(product.getExpirationDate().getTime());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+        String expDate1 = sdf.format(expDate);
 
         switch (columnIndex) {
             case 0:
@@ -51,7 +54,7 @@ public class TableModel extends AbstractTableModel {
             case 2:
                 return product.getCategory();
             case 3:
-                return expDate;
+                return expDate1;
             case 4:
                 return product.getDaysTillExpiration();
             default:
