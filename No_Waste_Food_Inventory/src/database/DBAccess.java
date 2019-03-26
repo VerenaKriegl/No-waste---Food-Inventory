@@ -26,26 +26,25 @@ public class DBAccess {
     public DBAccess(String url, String user, String passwd, String driver) throws ClassNotFoundException, SQLException {
         database = Database.getInstance(url, user, passwd, driver);
         dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-    }   
+    }
 
-   public void insertProduct(Product product, String username) throws Exception {
-       
-       
-       String sqlString = "INSERT INTO producttable"
+    public void insertProduct(Product product, String username) throws Exception {
+
+        String sqlString = "INSERT INTO producttable"
                 + "(productnr, description, expiredate, username, category) "
                 + "VALUES ('" + product.getProductNr()
                 + "','" + product.getProductName()
                 + "', '" + product.getExpirationDate()
                 + "', '" + username
                 + "','" + product.getCategory()
-                + "');";         
+                + "');";
 
         Statement statement = database.getStatement();
         statement.execute(sqlString);
 
         statement.close();
     }
- 
+
     public void insertUser(User user) {
         try {
             String sqlString = "INSERT INTO usertable"
@@ -62,16 +61,36 @@ public class DBAccess {
             Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
 
-    public String getPassword(String userName) throws Exception{
+    public void deleteEntries(String username) throws Exception {
+        String sqlString = "DELETE FROM producttable WHERE username = '" + username + "' ;";
+
+            Statement statement = database.getStatement();
+            statement.execute(sqlString);
+            statement.close();
+    }
+    
+    public static void main(String[] args) {
+        DBAccess db;
+        try {
+            db = new DBAccess();
+            db.deleteEntries("");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public String getPassword(String userName) throws Exception {
         Statement statement = database.getStatement();
-        String sqlQueryPassword = "SELECT * FROM usertable WHERE username = '"+userName+"';";
+        String sqlQueryPassword = "SELECT * FROM usertable WHERE username = '" + userName + "';";
         System.out.println("");
         ResultSet resultSet = statement.executeQuery(sqlQueryPassword);
         String password = "";
-        while(resultSet.next())
-        {
+        while (resultSet.next()) {
             password = resultSet.getString("password");
         }
         statement.close();
@@ -91,10 +110,10 @@ public class DBAccess {
         statement.close();
         return user;
     }
-    
+
     public ArrayList<Product> showAllProducts(String userName) throws Exception {
         Statement statement = database.getStatement();
-        String sqlQueryProduct = "SELECT * FROM producttable WHERE username = '"+userName+"' ;";
+        String sqlQueryProduct = "SELECT * FROM producttable WHERE username = '" + userName + "' ;";
 
         ResultSet resultSet = statement.executeQuery(sqlQueryProduct);
 
@@ -103,8 +122,7 @@ public class DBAccess {
             String productName = resultSet.getString("description");
             Date expDate = resultSet.getDate("expireDate");
             String category = resultSet.getString("category");
-            
-            
+
             Product product = new Product(productName, expDate, category, productNr, false);
             products.add(product);
         }
