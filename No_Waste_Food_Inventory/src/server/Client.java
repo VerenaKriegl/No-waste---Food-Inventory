@@ -119,7 +119,7 @@ public class Client
                 ArrayList<Product> listProduct = (ArrayList)ois.readObject();
                 for(Product p : listProduct)
                 {
-//                    model.add(p);
+                    model.add(p);
                 }
                 System.out.println("hier");
                 System.out.println(listProduct.get(0).getProductName());

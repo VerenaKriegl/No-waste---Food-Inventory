@@ -5,7 +5,7 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.sql.Date;
+import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -60,7 +60,7 @@ public class AddProductDlg extends JDialog {
         spExpirationDate = new JSpinner(new SpinnerDateModel());
         JSpinner.DateEditor d = new JSpinner.DateEditor(spExpirationDate, "dd.MM.yyyy");
         spExpirationDate.setEditor(d);
-        panelMenu.add(spExpirationDate);
+        panelMenu.add(spExpirationDate);    
 
         JLabel lbCategory = new JLabel("Category:");
         tfCategory = new JTextField();
@@ -95,12 +95,11 @@ public class AddProductDlg extends JDialog {
     }
   
     public Product getProduct() {
-        expDate = (Date) spExpirationDate.getValue();
-
-        product = new Product(tfProductName.getText(), (java.sql.Date) expDate,
-                tfCategory.getText(),
-                Integer.parseInt(tfProductNr.getText()), false);
-
+        java.util.Date date = (java.util.Date)spExpirationDate.getValue();
+        System.out.println(date);
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+       
+        Product product = new Product(tfProductName.getText(), sqlDate, tfCategory.getText(), Integer.parseInt(tfProductNr.getText()), ok);
         return product;
     }
 

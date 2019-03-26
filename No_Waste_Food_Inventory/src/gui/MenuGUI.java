@@ -124,7 +124,6 @@ public final class MenuGUI extends JFrame
             
             Product newProduct = addDlg.getProduct();
             client.addProduct(newProduct);
-            tableModel.add(newProduct);
             products.add(newProduct);
         }
     }
