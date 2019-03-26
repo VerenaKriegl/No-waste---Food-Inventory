@@ -98,7 +98,7 @@ public class DBAccess {
     
     public ArrayList<Product> showAllProducts(String userName) throws Exception {
         Statement statement = database.getStatement();
-        String sqlQueryProduct = "SELECT * FROM producttable WHERE username = "+userName+" ;";
+        String sqlQueryProduct = "SELECT * FROM producttable WHERE username = '"+userName+"' ;";
 
         ResultSet resultSet = statement.executeQuery(sqlQueryProduct);
 
