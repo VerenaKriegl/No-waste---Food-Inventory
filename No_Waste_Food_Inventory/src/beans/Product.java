@@ -1,17 +1,16 @@
 package beans;
 
 import java.io.Serializable;
-import java.sql.Date;
 
-public class Product implements Serializable{
+public class Product implements Serializable {
 
     private String productName;
-    private Date expirationDate;                           
+    private String expirationDate;                           
     private String category;
     private int productNr;
     private boolean reminder;
 
-    public Product(String productName, Date expirationDate, String category, int productNr, boolean reminder) {
+    public Product(String productName, String expirationDate, String category, int productNr, boolean reminder) {
         this.productName = productName;
         this.expirationDate = expirationDate;
         this.category = category;
@@ -23,7 +22,7 @@ public class Product implements Serializable{
         return productName;
     }
 
-    public java.sql.Date getExpirationDate() {
+    public String getExpirationDate() {
         return expirationDate;
     }
 

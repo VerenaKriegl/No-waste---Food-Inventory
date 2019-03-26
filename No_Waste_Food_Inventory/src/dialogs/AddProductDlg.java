@@ -5,7 +5,9 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -20,9 +22,10 @@ public class AddProductDlg extends JDialog {
     private JTextField tfCategory;
     private JTextField tfProductName;
     private JSpinner spExpirationDate;
-    private Date expDate;
+    private LocalDate expDate;
     private Product product;
     private boolean ok;
+    private DateFormat dateFormat;
 
     public AddProductDlg(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -34,6 +37,8 @@ public class AddProductDlg extends JDialog {
         this.pack();
 
         ok = false;
+        
+        dateFormat = new SimpleDateFormat("dd.MM.yyyy");
     }
 
     private void initComponents() {
@@ -95,9 +100,11 @@ public class AddProductDlg extends JDialog {
     }
   
     public Product getProduct() {
-        expDate = (Date) spExpirationDate.getValue();
+        expDate = (LocalDate) spExpirationDate.getValue();
+        
+        String expirationDate = dateFormat.format(expDate);
 
-        product = new Product(tfProductName.getText(), (java.sql.Date) expDate,
+        product = new Product(tfProductName.getText(), expirationDate,
                 tfCategory.getText(),
                 Integer.parseInt(tfProductNr.getText()), false);
 
