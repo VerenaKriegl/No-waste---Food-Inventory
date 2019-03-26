@@ -116,16 +116,18 @@ public final class MenuGUI extends JFrame {
         if (addDlg.isOK()) {
 
             Product newProduct = addDlg.getProduct();
+            products.add(newProduct);            
             client.addProduct(newProduct);
-            products.add(newProduct);
         }
     }
 
     private void onRemoveProduct() {
         int indexOfSelectedProduct = productTable.getSelectedRow();
-
+        
         if (indexOfSelectedProduct > -1) {
             tableModel.removeProductAtIndex(indexOfSelectedProduct);
+            client.remove(products.get(indexOfSelectedProduct));
+            products.remove(indexOfSelectedProduct);
         }
     }
 
@@ -143,6 +145,12 @@ public final class MenuGUI extends JFrame {
                 }
             }
         }
+    }
+
+    public void addProduct(Product p) 
+    {
+        products.add(p);
+        tableModel.add(p);
     }
 
     class PopupListener extends MouseAdapter {

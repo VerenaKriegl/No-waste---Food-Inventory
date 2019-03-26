@@ -80,7 +80,6 @@ public class Database {
         connection.close();
         instance = null;
     }
-    
 
     public void createTableProduct() throws SQLException {
         Statement statement = connection.createStatement();

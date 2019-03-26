@@ -99,6 +99,9 @@ public class Client
     public void addProduct(Product product) 
     {
         try {
+            
+            oos.writeObject("hinzufuegen");
+            oos.flush();
             oos.writeObject(product);
             oos.flush();
         } catch (IOException ex) {
@@ -110,6 +113,18 @@ public class Client
     {
         this.model = m;
     }
+
+    public void remove(Product product) 
+    {
+        try {
+            oos.writeObject("loeschen");
+            oos.flush();
+            oos.writeObject(product);
+            oos.flush();
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     class ServerCommunication extends Thread
     {
 
@@ -119,7 +134,7 @@ public class Client
                 ArrayList<Product> listProduct = (ArrayList)ois.readObject();
                 for(Product p : listProduct)
                 {
-                    model.add(p);
+                    menu.addProduct(p);
                 }
                 System.out.println("hier");
             

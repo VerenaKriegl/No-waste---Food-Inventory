@@ -62,27 +62,14 @@ public class DBAccess {
         }
     }
 
-    public void deleteEntries(String username) throws Exception {
-        String sqlString = "DELETE FROM producttable WHERE username = '" + username + "' ;";
+    public void deleteEntries(int productNr, String username) throws Exception {
+        String sqlString = "DELETE FROM producttable WHERE username = '" + username + "' AND productnr = '"+productNr+"';";
 
             Statement statement = database.getStatement();
             statement.execute(sqlString);
             statement.close();
     }   
     
-    public static void main(String[] args) {
-        DBAccess db;
-        try {
-            db = new DBAccess();
-            db.deleteEntries("");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
     public String getPassword(String userName) throws Exception {
         Statement statement = database.getStatement();

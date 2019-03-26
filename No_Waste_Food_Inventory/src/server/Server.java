@@ -19,8 +19,6 @@ public class Server {
 
     private Map<String, ArrayList<Product>> userMap = new HashMap();
 
-    
-
     public Server() throws IOException {
         ServerSocket serverSocket = new ServerSocket(9999);
         ClientConnection clientConnection = new ClientConnection(serverSocket);
@@ -103,7 +101,7 @@ public class Server {
                 }
                 ClientProducts clientProducts = new ClientProducts(oos, ois, dbAccess, username);
                 clientProducts.start();
-                
+
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {
@@ -118,14 +116,15 @@ public class Server {
     private void log(String message) {
         System.out.println(message);
     }
-    class ClientProducts extends Thread
-    {
+
+    class ClientProducts extends Thread {
+
         ObjectInputStream ois;
         ObjectOutputStream oos;
         String username;
-        DBAccess  dba;
-        public ClientProducts(ObjectOutputStream oos, ObjectInputStream ois, DBAccess dba, String username)
-        {
+        DBAccess dba;
+
+        public ClientProducts(ObjectOutputStream oos, ObjectInputStream ois, DBAccess dba, String username) {
             this.ois = ois;
             this.oos = oos;
             this.username = username;
@@ -139,18 +138,25 @@ public class Server {
                 listProduct = dba.showAllProducts(username);
                 oos.writeObject(listProduct);
                 oos.flush();
-                
-                while(true)
-                {
-                    Product product = (Product)ois.readObject();
-                    dba.insertProduct(product, username);
-                    oos.writeObject(product);
-                    oos.flush();
+
+                while (true) {
+                    String line = (String) ois.readObject();
+                    if (line.equals("hinzufuegen")) {
+                        Product product = (Product) ois.readObject();
+                        dba.insertProduct(product, username);
+                        oos.writeObject(product);
+                        oos.flush();
+                    }
+                    else
+                    {
+                        Product product = (Product)ois.readObject();
+                        dba.deleteEntries(product.getProductNr(), username);
+                    }
                 }
             } catch (Exception ex) {
                 Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
-            }       
+            }
         }
-        
+
     }
 }
