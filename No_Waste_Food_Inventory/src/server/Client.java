@@ -86,4 +86,14 @@ public class Client
         }
         
     }
+    
+    class ServerCommunication extends Thread
+    {
+
+        @Override
+        public void run() {
+            
+        }
+        
+    }
 }

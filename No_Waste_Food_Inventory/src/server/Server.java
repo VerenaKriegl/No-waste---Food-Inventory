@@ -73,12 +73,12 @@ public class Server {
         @Override
         public void run() {
             try {
-                User user = null;
+                String username = null;
                 dbAccess = new DBAccess();
                 String line = (String) ois.readObject();
                 ArrayList<String> userNames = dbAccess.showUser();
                 if (line.contains("Anmelden")) {
-                    String username = (String) ois.readObject();
+                    username = (String) ois.readObject();
                     String password = dbAccess.getPassword(username);
                     line = (String) ois.readObject();
                     if (password.equals(line)) {
@@ -90,7 +90,8 @@ public class Server {
                     }
                 } else {
                     ArrayList<Product> productList = new ArrayList<>();
-                    user = (User) ois.readObject();
+                    User user = (User) ois.readObject();
+                    username = user.getUserName();
                     if (!userNames.contains(user.getUserName())) {
                         dbAccess.insertUser(user);
                         userMap.put(line, productList);
@@ -102,7 +103,7 @@ public class Server {
                     }
                 }
 
-                listProduct = dbAccess.showAllProducts(user.getUserName());
+                listProduct = dbAccess.showAllProducts(username);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {

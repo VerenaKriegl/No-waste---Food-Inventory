@@ -38,7 +38,7 @@ public class DBAccess {
 
         statement.close();
     }
-    
+ 
     public void insertUser(User user) {
         try {
             String sqlString = "INSERT INTO usertable"
@@ -56,17 +56,6 @@ public class DBAccess {
         }
     }
     
-    public static void main(String[] args) {
-        try {
-            DBAccess db = new DBAccess();
-            db.insertUser(new User("hans", "abcd", new Date(System.currentTimeMillis())));
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(DBAccess.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
 
     public String getPassword(String userName) throws Exception{
         Statement statement = database.getStatement();
