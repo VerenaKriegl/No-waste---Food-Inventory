@@ -6,6 +6,8 @@ import java.sql.Statement;
 import beans.Product;
 import beans.User;
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,17 +16,22 @@ public class DBAccess {
 
     private Database database;
     private ArrayList<Product> products = new ArrayList();
+    private DateFormat dateFormat;
 
     public DBAccess() throws ClassNotFoundException, SQLException {
         database = Database.getInstance();
+        dateFormat = new SimpleDateFormat("dd.MM.yyyy");
     }
 
     public DBAccess(String url, String user, String passwd, String driver) throws ClassNotFoundException, SQLException {
         database = Database.getInstance(url, user, passwd, driver);
+        dateFormat = new SimpleDateFormat("dd.MM.yyyy");
     }   
 
    public void insertProduct(Product product, String username) throws Exception {
-        String sqlString = "INSERT INTO producttable"
+       
+       
+       String sqlString = "INSERT INTO producttable"
                 + "(productnr, description, expiredate, username, category) "
                 + "VALUES ('" + product.getProductNr()
                 + "','" + product.getProductName()
@@ -94,10 +101,11 @@ public class DBAccess {
         while (resultSet.next()) {
             int productNr = resultSet.getInt("productNr");
             String productName = resultSet.getString("description");
-            Date expirationDate = resultSet.getDate("expireDate");
+            Date expDate = resultSet.getDate("expireDate");
             String category = resultSet.getString("category");
-
-            Product product = new Product(productName, expirationDate, category, productNr, false);
+            
+            
+            Product product = new Product(productName, expDate, category, productNr, false);
             products.add(product);
         }
         statement.close();

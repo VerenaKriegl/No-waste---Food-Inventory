@@ -24,8 +24,7 @@ import model.TableCellRenderer;
 import model.TableModel;
 import server.Client;
 
-public final class MenuGUI extends JFrame
-{
+public final class MenuGUI extends JFrame {
 
     private JTable productTable;
     private JToolBar tbTools;
@@ -35,8 +34,7 @@ public final class MenuGUI extends JFrame
     private ArrayList<Reminder> reminders = new ArrayList<>();
     private Client client;
 
-    public MenuGUI(Client client)
-    {
+    public MenuGUI(Client client) {
         super("Menu");
         this.client = client;
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -48,8 +46,7 @@ public final class MenuGUI extends JFrame
         this.pack();
     }
 
-    public void initComponents()
-    {
+    public void initComponents() {
         Container con = new Container();
         con.setLayout(new BorderLayout());
 
@@ -65,8 +62,7 @@ public final class MenuGUI extends JFrame
         this.add(con);
     }
 
-    private JPanel getTable()
-    {
+    private JPanel getTable() {
         productTable = new JTable();
         productTable.setModel(tableModel);
         productTable.setDefaultRenderer(Object.class, tableCellRenderer);
@@ -93,8 +89,7 @@ public final class MenuGUI extends JFrame
         return tablePanel;
     }
 
-    private JPanel getToolBar()
-    {
+    private JPanel getToolBar() {
         tbTools = new JToolBar();
 
         Button btAddProduct = new Button("Add product");
@@ -114,43 +109,35 @@ public final class MenuGUI extends JFrame
         return panelTools;
     }
 
-    private void onAddProduct()
-    {
+    private void onAddProduct() {
         AddProductDlg addDlg = new AddProductDlg(this, true);
         addDlg.setVisible(true);
 
-        if (addDlg.isOK())
-        {
-            
+        if (addDlg.isOK()) {
+
             Product newProduct = addDlg.getProduct();
             client.addProduct(newProduct);
             products.add(newProduct);
         }
     }
 
-    private void onRemoveProduct()
-    {
+    private void onRemoveProduct() {
         int indexOfSelectedProduct = productTable.getSelectedRow();
 
-        if (indexOfSelectedProduct > -1)
-        {
+        if (indexOfSelectedProduct > -1) {
             tableModel.removeProductAtIndex(indexOfSelectedProduct);
         }
     }
 
-    private void onOpenSettings()
-    {
+    private void onOpenSettings() {
         SettingsDlg settingsDlg = new SettingsDlg(this, true, products);
         settingsDlg.setVisible(true);
 
-        if (settingsDlg.isOK())
-        {
+        if (settingsDlg.isOK()) {
             Reminder reminder = settingsDlg.getReminder();
             reminders.add(reminder);
-            for (Product product : products)
-            {
-                if (product.getProductName().contains(reminder.getProductName()))
-                {
+            for (Product product : products) {
+                if (product.getProductName().contains(reminder.getProductName())) {
                     product.setReminder(true);
                     tableModel.modify();
                 }
@@ -158,31 +145,24 @@ public final class MenuGUI extends JFrame
         }
     }
 
-
-    class PopupListener extends MouseAdapter
-    {
+    class PopupListener extends MouseAdapter {
 
         JPopupMenu popup;
 
-        PopupListener(JPopupMenu popupMenu)
-        {
+        PopupListener(JPopupMenu popupMenu) {
             popup = popupMenu;
         }
 
-        public void mousePressed(MouseEvent e)
-        {
+        public void mousePressed(MouseEvent e) {
             maybeShowPopup(e);
         }
 
-        public void mouseReleased(MouseEvent e)
-        {
+        public void mouseReleased(MouseEvent e) {
             maybeShowPopup(e);
         }
 
-        private void maybeShowPopup(MouseEvent e)
-        {
-            if (e.isPopupTrigger())
-            {
+        private void maybeShowPopup(MouseEvent e) {
+            if (e.isPopupTrigger()) {
                 popup.show(e.getComponent(),
                         e.getX(), e.getY());
             }

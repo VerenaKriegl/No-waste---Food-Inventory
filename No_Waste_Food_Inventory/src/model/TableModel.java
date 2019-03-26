@@ -6,53 +6,46 @@ import java.util.Date;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
-public class TableModel extends AbstractTableModel
-{
+public class TableModel extends AbstractTableModel {
 
     private ArrayList<Product> products;
     private Filter filter;
     private ArrayList<Product> currentFilteredProducts;
-    private final String[] colName =
-    {
-        "ProductNr", "Bezeichnung", "Kategorie",
-        "Ablaufdatum", "TageBisAblauf"
-    };
+    private final String[] colName
+            = {
+                "ProductNr", "Bezeichnung", "Kategorie",
+                "Ablaufdatum", "TageBisAblauf"
+            };
 
-    public TableModel()
-    {
+    public TableModel() {
         filter = new Filter();
         products = new ArrayList();
         currentFilteredProducts = new ArrayList();
     }
 
     @Override
-    public int getRowCount()
-    {
+    public int getRowCount() {
         return products.size();
     }
 
     @Override
-    public String getColumnName(int column)
-    {
+    public String getColumnName(int column) {
         return colName[column];
     }
 
     @Override
-    public int getColumnCount()
-    {
+    public int getColumnCount() {
         return colName.length;
     }
 
     @Override
-    public Object getValueAt(int rowIndex, int columnIndex)
-    {
+    public Object getValueAt(int rowIndex, int columnIndex) {
         Product product = products.get(rowIndex);
         Date expDate = new Date(product.getExpirationDate().getTime());
 
-        switch (columnIndex)
-        {
+        switch (columnIndex) {
             case 0:
-                return product.getProductNr() + product.toString();
+                return product.getProductNr();
             case 1:
                 return product.getProductName();
             case 2:
@@ -66,45 +59,37 @@ public class TableModel extends AbstractTableModel
         }
     }
 
-    public void modify()
-    {
+    public void modify() {
         this.fireTableDataChanged();
     }
 
-    public void add(Product product)
-    {
+    public void add(Product product) {
         products.add(product);
         this.fireTableRowsInserted(0, products.size() - 1);
     }
 
-    public void removeProductAtIndex(int index)
-    {
+    public void removeProductAtIndex(int index) {
         products.remove(index);
         this.fireTableRowsDeleted(index, index);
     }
 
-    public void setFilter(String category, String productName)
-    {
+    public void setFilter(String category, String productName) {
         filter.setCategory(category);
         filter.setProductName(productName);
         filter();
     }
 
-    private void filter()
-    {
+    private void filter() {
         currentFilteredProducts.clear();
-        for (Product product : products)
-        {
-            if (filter.accept(product))
-            {
+        for (Product product : products) {
+            if (filter.accept(product)) {
                 currentFilteredProducts.add(product);
             }
             this.fireTableDataChanged();
         }
     }
 
-    public ArrayList<Product> getProducts()
-    {
+    public ArrayList<Product> getProducts() {
         return products;
     }
 
