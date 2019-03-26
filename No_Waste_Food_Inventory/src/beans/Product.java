@@ -23,7 +23,7 @@ public class Product implements Serializable{
         return productName;
     }
 
-    public Date getExpirationDate() {
+    public java.sql.Date getExpirationDate() {
         return expirationDate;
     }
 
