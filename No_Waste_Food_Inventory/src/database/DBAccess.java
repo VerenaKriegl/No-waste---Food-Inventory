@@ -94,7 +94,7 @@ public class DBAccess {
         while (resultSet.next()) {
             int productNr = resultSet.getInt("productNr");
             String productName = resultSet.getString("description");
-            Date expirationDate = resultSet.getDate("expirationDate");
+            Date expirationDate = resultSet.getDate("expireDate");
             String category = resultSet.getString("category");
 
             Product product = new Product(productName, expirationDate, category, productNr, false);

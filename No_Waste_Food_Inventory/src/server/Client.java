@@ -1,5 +1,6 @@
 package server;
 
+import beans.Product;
 import beans.User;
 import gui.LoginGUI;
 import gui.MenuGUI;
@@ -8,6 +9,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -46,6 +48,8 @@ public class Client
             {
                 JOptionPane.showMessageDialog(loginGUI, "Login fehlgeschlagen");
             }
+            ServerCommunication sc = new ServerCommunication();
+            sc.start();
         } catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -77,6 +81,8 @@ public class Client
                 JOptionPane.showMessageDialog(loginGUI, "Registrierung fehlgeschlagen!");
                 System.out.println("Fehler");
             }
+            ServerCommunication sc = new ServerCommunication();
+            sc.start();
             
             
         } catch (IOException ex) {
@@ -92,7 +98,15 @@ public class Client
 
         @Override
         public void run() {
-            
+            try {
+                ArrayList<Product> listProduct = (ArrayList)ois.readObject();
+                System.out.println("hier");
+                System.out.println(listProduct.get(0).getProductName());
+            } catch (IOException ex) {
+                Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
     }

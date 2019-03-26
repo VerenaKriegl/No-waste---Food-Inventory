@@ -1,8 +1,9 @@
 package beans;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Product {
+public class Product implements Serializable{
 
     private String productName;
     private Date expirationDate;                           

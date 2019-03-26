@@ -56,7 +56,6 @@ public class Server {
 
         private DBAccess dbAccess;
         private Socket socket;
-        private ArrayList<Product> listProduct = new ArrayList<>();
         private ObjectInputStream ois;
         private ObjectOutputStream oos;
 
@@ -102,8 +101,9 @@ public class Server {
                         oos.flush();
                     }
                 }
-
-                listProduct = dbAccess.showAllProducts(username);
+                ClientProducts clientProducts = new ClientProducts(oos, ois, dbAccess, username);
+                clientProducts.start();
+                
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {
@@ -117,5 +117,32 @@ public class Server {
 
     private void log(String message) {
         System.out.println(message);
+    }
+    class ClientProducts extends Thread
+    {
+        ObjectInputStream ois;
+        ObjectOutputStream oos;
+        String username;
+        DBAccess  dba;
+        public ClientProducts(ObjectOutputStream oos, ObjectInputStream ois, DBAccess dba, String username)
+        {
+            this.ois = ois;
+            this.oos = oos;
+            this.username = username;
+            this.dba = dba;
+        }
+
+        @Override
+        public void run() {
+            ArrayList<Product> listProduct = new ArrayList<>();
+            try {
+                listProduct = dba.showAllProducts(username);
+                oos.writeObject(listProduct);
+                oos.flush();
+            } catch (Exception ex) {
+                Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+            }       
+        }
+        
     }
 }
