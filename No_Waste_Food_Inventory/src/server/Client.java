@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import model.TableModel;
 
 public class Client 
 {
@@ -41,8 +42,8 @@ public class Client
             {
                 System.out.println(line);
                 loginGUI.setVisible(false);
-                MenuGUI menuGUI = new MenuGUI();
-                menuGUI.setVisible(true);
+                menu = new MenuGUI(this);
+                menu.setVisible(true);
             }
             else
             {
@@ -73,8 +74,8 @@ public class Client
             if(line.contains("Willkommen"))
             {
                 loginGUI.setVisible(false);
-                MenuGUI menuGUI = new MenuGUI();
-                menuGUI.setVisible(true);
+                menu = new MenuGUI(this);
+                menu.setVisible(true);
             }
             else
             {
@@ -92,7 +93,23 @@ public class Client
         }
         
     }
-    
+    private MenuGUI menu;
+
+    private TableModel model;
+    public void addProduct(Product product) 
+    {
+        try {
+            oos.writeObject(product);
+            oos.flush();
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    public void setModel(TableModel m)
+    {
+        this.model = m;
+    }
     class ServerCommunication extends Thread
     {
 
@@ -100,8 +117,18 @@ public class Client
         public void run() {
             try {
                 ArrayList<Product> listProduct = (ArrayList)ois.readObject();
+                for(Product p : listProduct)
+                {
+//                    model.add(p);
+                }
                 System.out.println("hier");
                 System.out.println(listProduct.get(0).getProductName());
+            
+                while(true)
+                {
+                    Product p = (Product)ois.readObject();
+                    model.add(p);
+                }
             } catch (IOException ex) {
                 Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {

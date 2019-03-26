@@ -139,6 +139,14 @@ public class Server {
                 listProduct = dba.showAllProducts(username);
                 oos.writeObject(listProduct);
                 oos.flush();
+                
+                while(true)
+                {
+                    Product product = (Product)ois.readObject();
+                    dba.insertProduct(product, username);
+                    oos.writeObject(product);
+                    oos.flush();
+                }
             } catch (Exception ex) {
                 Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
             }       

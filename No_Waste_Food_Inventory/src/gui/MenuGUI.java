@@ -22,6 +22,7 @@ import javax.swing.JTable;
 import javax.swing.JToolBar;
 import model.TableCellRenderer;
 import model.TableModel;
+import server.Client;
 
 public final class MenuGUI extends JFrame
 {
@@ -32,17 +33,18 @@ public final class MenuGUI extends JFrame
     private TableCellRenderer tableCellRenderer;
     private ArrayList<Product> products = new ArrayList<>();
     private ArrayList<Reminder> reminders = new ArrayList<>();
+    private Client client;
 
-    public MenuGUI()
+    public MenuGUI(Client client)
     {
         super("Menu");
-
+        this.client = client;
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setPreferredSize(new Dimension(500, 700));
         this.setLocationRelativeTo(null);
 
         initComponents();
-
+        client.setModel(tableModel);
         this.pack();
     }
 
@@ -119,7 +121,9 @@ public final class MenuGUI extends JFrame
 
         if (addDlg.isOK())
         {
+            
             Product newProduct = addDlg.getProduct();
+            client.addProduct(newProduct);
             tableModel.add(newProduct);
             products.add(newProduct);
         }
@@ -155,7 +159,6 @@ public final class MenuGUI extends JFrame
         }
     }
 
-    
 
     class PopupListener extends MouseAdapter
     {
