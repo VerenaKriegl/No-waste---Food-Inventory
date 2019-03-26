@@ -1,16 +1,19 @@
 package beans;
 
 import java.io.Serializable;
+import java.sql.Date;
+import java.util.Calendar;
 
 public class Product implements Serializable {
 
     private String productName;
-    private java.sql.Date expirationDate;                           
+    private Date expirationDate;                           
     private String category;
     private int productNr;
     private boolean reminder;
+    private int daysTillExpiration;
 
-    public Product(String productName, java.sql.Date expirationDate, String category, int productNr, boolean reminder) {
+    public Product(String productName, Date expirationDate, String category, int productNr, boolean reminder) {
         this.productName = productName;
         this.expirationDate = expirationDate;
         this.category = category;
@@ -22,7 +25,7 @@ public class Product implements Serializable {
         return productName;
     }
 
-    public java.sql.Date getExpirationDate() {
+    public Date getExpirationDate() {
         return expirationDate;
     }
 
@@ -35,7 +38,19 @@ public class Product implements Serializable {
     }
 
     public int getDaysTillExpiration() {
-        return 0;
+        java.util.Date utilDate = new java.util.Date();
+        Date sysdate = new Date(utilDate.getTime());
+        
+        Calendar calendarNow = Calendar.getInstance();
+        calendarNow.setTime(sysdate);
+        
+        Calendar calendarExpiration = Calendar.getInstance();
+        calendarExpiration.setTime(expirationDate);
+        
+        daysTillExpiration = calendarExpiration.get(Calendar.DAY_OF_YEAR) 
+                    - calendarNow.get(Calendar.DAY_OF_YEAR);
+        
+        return daysTillExpiration;
     }
 
     public boolean isReminder() {
