@@ -122,7 +122,6 @@ public class Client
                     model.add(p);
                 }
                 System.out.println("hier");
-                System.out.println(listProduct.get(0).getProductName());
             
                 while(true)
                 {
