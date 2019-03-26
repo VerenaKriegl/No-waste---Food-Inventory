@@ -73,6 +73,7 @@ public class Server {
         @Override
         public void run() {
             try {
+                User user = null;
                 dbAccess = new DBAccess();
                 String line = (String) ois.readObject();
                 ArrayList<String> userNames = dbAccess.showUser();
@@ -89,7 +90,7 @@ public class Server {
                     }
                 } else {
                     ArrayList<Product> productList = new ArrayList<>();
-                    User user = (User) ois.readObject();
+                    user = (User) ois.readObject();
                     if (!userNames.contains(user.getUserName())) {
                         dbAccess.insertUser(user);
                         userMap.put(line, productList);
@@ -101,7 +102,7 @@ public class Server {
                     }
                 }
 
-                listProduct = dbAccess.showAllProducts("test");
+                listProduct = dbAccess.showAllProducts(user.getUserName());
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {
