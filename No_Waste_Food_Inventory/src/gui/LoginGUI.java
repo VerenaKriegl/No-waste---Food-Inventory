@@ -17,6 +17,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import server.Client;
 
@@ -24,7 +25,7 @@ import server.Client;
 public class LoginGUI extends JFrame {
     
     private JTextField tfMail;
-    private JTextField tfPass;
+    private JPasswordField tfPass;
     private Client client;
     
     public LoginGUI() {
@@ -70,7 +71,7 @@ public class LoginGUI extends JFrame {
         JLabel lbPass = new JLabel("Password");
         
         tfMail = new JTextField();
-        tfPass = new JTextField();
+        tfPass = new JPasswordField();
         
         JPanel plMail = new JPanel();
         plMail.setLayout(new GridLayout(1,2));

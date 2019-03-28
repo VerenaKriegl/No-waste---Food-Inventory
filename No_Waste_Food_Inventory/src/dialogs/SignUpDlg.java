@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
@@ -19,7 +20,7 @@ import javax.swing.SpinnerDateModel;
 public class SignUpDlg extends JDialog {
 
     private JTextField tfUsername;
-    private JTextField tfPass;
+    private JPasswordField tfPass;
     private JSpinner dateOfBirth;
     private boolean ok;
 
@@ -54,7 +55,7 @@ public class SignUpDlg extends JDialog {
         plMenu.add(tfUsername);
 
         JLabel lbPass = new JLabel("Password:");
-        tfPass = new JTextField();
+        tfPass = new JPasswordField();
         plMenu.add(lbPass);
         plMenu.add(tfPass);
 
