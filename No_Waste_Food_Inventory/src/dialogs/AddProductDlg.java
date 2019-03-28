@@ -129,15 +129,17 @@ public class AddProductDlg extends JDialog {
     }
     
     public ArrayList<String> getCategoriesFromFile(File file) {
+        ArrayList<String> categorieFromFile=null;
         try {
+            categorieFromFile = new ArrayList<>();
             InputStream is = new FileInputStream(file);
             BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
             
             String line = "";
             
             while((line = br.readLine()) != null) {
-                if(!categories.contains(line)) {
-                    categories.add(line);
+                if(!categorieFromFile.contains(line)) {
+                    categorieFromFile.add(line);
                 }
             }
         } catch (FileNotFoundException ex) {
@@ -148,6 +150,6 @@ public class AddProductDlg extends JDialog {
             System.out.println("error");
         }
 
-        return categories;
+        return categorieFromFile;
     }
 }
