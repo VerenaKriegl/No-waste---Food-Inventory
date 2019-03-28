@@ -5,12 +5,11 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.sql.Date;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JSpinner;
@@ -20,7 +19,8 @@ import javax.swing.SpinnerDateModel;
 public class SignUpDlg extends JDialog {
 
     private JTextField tfUsername;
-    private JPasswordField tfPass;
+    private JPasswordField pfPass;
+    private JPasswordField pfConfirmPass;
     private JSpinner dateOfBirth;
     private boolean ok;
 
@@ -28,7 +28,7 @@ public class SignUpDlg extends JDialog {
         super(parent, modal);
 
         this.pack();
-        this.setTitle("Add product");
+        this.setTitle("Sign Up");
         this.setSize(new Dimension(400, 500));
 
         initComponents();
@@ -40,14 +40,14 @@ public class SignUpDlg extends JDialog {
         Container container = new Container();
         container.setLayout(new BorderLayout());
 
-        container.add(getSignUpMenu(), BorderLayout.CENTER);
+        container.add(getSignUpMenu());
 
         this.add(container);
     }
 
     private JPanel getSignUpMenu() {
         JPanel plMenu = new JPanel();
-        plMenu.setLayout(new GridLayout(4, 2));
+        plMenu.setLayout(new GridLayout(5, 2));
 
         JLabel lbUsername = new JLabel("Username:");
         tfUsername = new JTextField();
@@ -55,9 +55,14 @@ public class SignUpDlg extends JDialog {
         plMenu.add(tfUsername);
 
         JLabel lbPass = new JLabel("Password:");
-        tfPass = new JPasswordField();
+        pfPass = new JPasswordField();
         plMenu.add(lbPass);
-        plMenu.add(tfPass);
+        plMenu.add(pfPass);
+        
+        JLabel lbConfirmPass = new JLabel("Confirm password:");
+        pfConfirmPass = new JPasswordField();
+        plMenu.add(lbConfirmPass);
+        plMenu.add(pfConfirmPass);
 
         JLabel lbDateOfBirth = new JLabel("Date of birth:");
         dateOfBirth = new JSpinner(new SpinnerDateModel());
@@ -79,8 +84,12 @@ public class SignUpDlg extends JDialog {
     }
 
     private void onSignUp() {
-        ok = true;
-        setVisible(false);
+        if(pfPass.getText().equals(pfConfirmPass.getText())) {
+            ok = true;
+            setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(null, "Password doesn't match");
+        }
     }
 
     private void onCancel() {
@@ -92,7 +101,7 @@ public class SignUpDlg extends JDialog {
         java.util.Date date = (java.util.Date)dateOfBirth.getValue();
         System.out.println(date);
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-        User newUser = new User(tfUsername.getText(), tfPass.getText(), sqlDate);
+        User newUser = new User(tfUsername.getText(), pfPass.getText(), sqlDate);
         return newUser;
     }
 
