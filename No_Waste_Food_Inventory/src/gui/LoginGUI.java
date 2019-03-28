@@ -53,7 +53,7 @@ public class LoginGUI extends JFrame {
         JPanel plLogo = new JPanel();
         plLogo.setLayout(new BorderLayout());
         
-        ImageIcon iconUser = new ImageIcon("images/user.png");
+        ImageIcon iconUser = new ImageIcon("src/icons/user.png");
         
         JLabel lbIcon = new JLabel(iconUser);
         
