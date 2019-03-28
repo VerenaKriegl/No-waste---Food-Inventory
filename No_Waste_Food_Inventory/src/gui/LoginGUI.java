@@ -66,7 +66,7 @@ public class LoginGUI extends JFrame {
         JPanel plLogin = new JPanel();
         plLogin.setLayout(new GridLayout(4, 1));
         
-        JLabel lbMail = new JLabel("E-Mail Address");
+        JLabel lbMail = new JLabel("Username: ");
         JLabel lbPass = new JLabel("Password");
         
         tfMail = new JTextField();
