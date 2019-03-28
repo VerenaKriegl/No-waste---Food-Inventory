@@ -29,7 +29,8 @@ public class SignUpDlg extends JDialog {
 
         this.pack();
         this.setTitle("Sign Up");
-        this.setSize(new Dimension(400, 500));
+        this.setSize(new Dimension(300, 350));
+        this.setLocationRelativeTo(null);
 
         initComponents();
 

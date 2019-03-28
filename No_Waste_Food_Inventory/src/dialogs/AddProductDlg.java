@@ -5,8 +5,18 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.sql.Date;
+import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -17,18 +27,23 @@ import javax.swing.SpinnerDateModel;
 public class AddProductDlg extends JDialog {
 
     private JTextField tfProductNr;
-    private JTextField tfCategory;
+    private JComboBox cbCategory;
     private JTextField tfProductName;
     private JSpinner spExpirationDate;
     private Date expDate;
     private Product product;
     private boolean ok;
+    private ArrayList<String> categories;
+    private File file;
 
     public AddProductDlg(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         this.setTitle("Add product");
         this.setSize(new Dimension(500, 600));
-
+        
+        file = new File("src/beans/Category.csv");
+        categories = getCategoriesFromFile(file);
+        
         initComponents();
 
         this.pack();
@@ -63,9 +78,12 @@ public class AddProductDlg extends JDialog {
         panelMenu.add(spExpirationDate);
 
         JLabel lbCategory = new JLabel("Category:");
-        tfCategory = new JTextField();
+        cbCategory = new JComboBox();
+        for(String category : categories) {
+            cbCategory.addItem(category);
+        }
         panelMenu.add(lbCategory);
-        panelMenu.add(tfCategory);
+        panelMenu.add(cbCategory);
 
         JLabel lbProductName = new JLabel("Product name:");
         tfProductName = new JTextField();
@@ -100,7 +118,7 @@ public class AddProductDlg extends JDialog {
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 
         product = new Product(tfProductName.getText(), sqlDate,
-                tfCategory.getText(),
+                cbCategory.getSelectedItem().toString(),
                 Integer.parseInt(tfProductNr.getText()), false);
 
         return product;
@@ -108,5 +126,28 @@ public class AddProductDlg extends JDialog {
 
     public boolean isOK() {
         return ok;
+    }
+    
+    public ArrayList<String> getCategoriesFromFile(File file) {
+        try {
+            InputStream is = new FileInputStream(file);
+            BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+            
+            String line = "";
+            
+            while((line = br.readLine()) != null) {
+                if(!categories.contains(line)) {
+                    categories.add(line);
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println("file not found");
+        } catch (UnsupportedEncodingException ex) {
+            System.out.println("error");
+        } catch (IOException ex) {
+            System.out.println("error");
+        }
+
+        return categories;
     }
 }

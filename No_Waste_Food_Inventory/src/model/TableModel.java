@@ -95,5 +95,4 @@ public class TableModel extends AbstractTableModel {
     public ArrayList<Product> getProducts() {
         return products;
     }
-
 }

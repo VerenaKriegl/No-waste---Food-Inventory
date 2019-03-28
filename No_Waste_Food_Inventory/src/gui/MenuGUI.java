@@ -91,7 +91,7 @@ public final class MenuGUI extends JFrame {
 
     private JPanel getToolBar() {
         tbTools = new JToolBar();
-
+        
         Button btAddProduct = new Button("Add product");
         btAddProduct.addActionListener(e -> onAddProduct());
 
@@ -103,7 +103,7 @@ public final class MenuGUI extends JFrame {
 
         JPanel panelTools = new JPanel();
         panelTools.setLayout(new BorderLayout());
-
+        
         panelTools.add(tbTools);
 
         return panelTools;
